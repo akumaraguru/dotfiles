@@ -1,2 +1,2 @@
-feh --bg-fill ~/Pictures/wallpapers/Durarara0.jpg
+feh --bg-fill ~/Pictures/wallpapers/6.jpg
 i3-msg -q workspace 6

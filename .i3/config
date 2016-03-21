@@ -23,6 +23,10 @@ set $mod Mod4
 ### CUSTOM ###
 # font for window titles. ISO 10646 = Unicode
 font pango: M+ 1m, FontAwesome, Ionicons, 10
+
+# border defaults
+new_window none
+new_float pixel 1
 ### CUSTOM ###
 
 
@@ -95,6 +99,7 @@ bindsym $mod+c focus child
 
 ### CUSTOM ###
 # switch to workspace
+# better performance to execute commands via shell script than with 'exec'
 bindsym $mod+1 exec ~/.i3/wsp/wsp1
 bindsym $mod+2 exec ~/.i3/wsp/wsp2
 bindsym $mod+3 exec ~/.i3/wsp/wsp3
@@ -187,10 +192,11 @@ bindsym $mod+XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume 1 -
 mode "App launch" {
         bindsym f exec firefox
         bindsym h exec google-chrome-stable
-        bindsym s exec subl
+        bindsym t exec subl
         bindsym a exec arduino
         bindsym c exec gnome-calculator
         bindsym n exec nautilus --no-desktop
+        bindsym s exec unity-control-center
 
         bindsym Return mode "default"
         bindsym Escape mode "default"
@@ -221,13 +227,14 @@ bindsym $mod+XF86MonBrightnessUp exec xbacklight -inc 1 # increase screen bright
 bindsym $mod+XF86MonBrightnessDown exec xbacklight -dec 1 # decrease screen brightness
 
 ### Startup ###
-exec --no-starup-id feh --bg-fill ~/Pictures/wallpapers/TokyoGhoul0.jpg
+exec nm-applet
 exec xcompmgr
-
+# exec feh --bg-fill ~/Pictures/wallpapers/1.jpg
+exec ~/.i3/wspinit  # feh isn't working with 'exec'???
 exec xset -b     # disables bell
 exec xbacklight -set 20
 exec pactl set-sink-volume 1 20%
 exec synclient HorizTwoFingerScroll=1
 
 # Logout monitor
-exec xautoloc- 60k -time 15 -locker /bin/lock -detectsleep -notify 60 -notifier "notify-send WARNING: Locking due to inactivity 1 minute..."
+exec xautolock -time 15 -locker /bin/lock -detectsleep -notify 60 -notifier "notify-send WARNING: Locking due to inactivity 1 minute..."

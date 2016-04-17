@@ -1,0 +1,64 @@
+Note for how to reconfigure your Ubuntu Environment
+
+1. Verify the following are installed for basic use
+    - sublime-text-3
+    - vim
+    - synaptic package manager
+    - Arduino IDE
+    - Chrome
+    - Cadsoft EAGLE
+    - gparted
+    - convert
+    - VLC
+    - Hibike stack
+    - rtl-sdr stack + gqrx (follow ee123 instructions)
+    - xclip
+    - xcompmgr
+    - nm-applet
+    - xautolock
+    - xbacklight
+    - urxvt
+    - scrot
+    - feh
+    - xrandr
+    - powertop
+    - notify-osd (follow http://askubuntu.com/a/128508)
+    - j4-dmenu-desktop (build from source)
+    - tmux
+    - i3 + i3lock + i3tsatus
+    - 
+
+2. Configuration
+    - add user to dialout group
+    - Add udev rule in /etc/udev/rules.d/74-usbasp.rules
+      SUBSYSTEM=="usb", ATTR{idProduct}=="0c9f", ATTRS{idVendor}=="1781", GROUP="dialout", MODE="0660"
+    - follow through powertop optimizations
+    - clone dotfiles repo and copy into ~/
+    - configure wsp files
+    - add cron job:
+      */1 * * * * cd / && run-parts --report /home/arak/.i3/cron/
+    - add file /bin/lock
+      #!/bin/bash
+
+      scrot /tmp/screenshot.png
+      convert /tmp/screenshot.png -blur 0x6 /tmp/screenshotblur.png
+      i3lock -i /tmp/screenshotblur.png
+    - Take another shot at fixing gnome-keyring-daemon (idk...)
+    - add file ~/.xinitrc
+      #!/bin/sh
+
+      if [ `xrandr | grep -c ' connected '` -eq 2 ]; then # dual-monitor
+          if [ `xrandr | grep VGA1 | grep -c ' connected '` -eq 1 ]; then
+              xrandr --output eDP1 --auto --primary --output VGA1 --auto --left-of eDP1
+          fi
+      fi
+    - Configure copy/paste with urxvt
+      https://nixmeal.wordpress.com/2012/07/24/copypaste-text-in-urxvt-rxvt-unicode-using-keyboard/
+    - 
+
+
+4. Python configuration(check to use pip or apt-get)
+    - pyserial
+    - numpy/scipy stack + ipython + jupyter
+    - rtl-sdr
+    - 

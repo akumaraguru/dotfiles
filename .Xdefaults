@@ -26,11 +26,6 @@ URxvt.color15 : #EEEEEEEEECEC
 URxvt*foreground:White
 URxvt*background:Black
 
-! False Transparency
-!URxvt*.transparent:True
-! URxvt*.shading: 0 to 99 darkens, 101 to 200 lightens
-!URxvt*.shading:8
-
 ! True Transparency
 ! Make sure you have a composite manager (xcompmgr) running
 URxvt.depth: 32
@@ -47,8 +42,14 @@ URxvt*secondaryScroll: True
 URxvt*saveLines: 8000
 
 ! Tabs
-URxvt.perl-ext-common: tabbed
-URxvt.tabbed.tabbar-fg: 2
-URxvt.tabbed.tabbar-bg: 0
-URxvt.tabbed.tab-fg: 3
-URxvt.tabbed.tab-bg: 0
+! URxvt.perl-ext-common: tabbed
+! URxvt.tabbed.tabbar-fg: 2
+! URxvt.tabbed.tabbar-bg: 0
+! URxvt.tabbed.tab-fg: 3
+! URxvt.tabbed.tab-bg: 0
+
+! Copy/Paste
+! Make sure xclip is installed
+URxvt.keysym.Shift-Control-V: perl:clipboard:paste
+URxvt.iso14755: False
+URxvt.perl-ext-common: default,clipboard

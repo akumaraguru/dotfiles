@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Touchpad Config
+Comment=Custom config for Synaptics Touchpad
+Exec=/home/arak/.config/custom/gnome-input-startup.sh
+Terminal=false
+Type=Application

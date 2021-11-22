@@ -117,4 +117,30 @@ if ! shopt -oq posix; then
   fi
 fi
 
-export PATH=$PATH:/usr/share/eagle/bin
+# GPG
+GPG_TTY=$(tty)
+GPG_KEY=$(gpg --list-keys --with-colons | grep -m1 -e'^fpr' | cut -d':' -f10)
+
+# Python virtualenv
+export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python3
+export WORKON_HOME=$HOME/.virtualenvs
+source $HOME/.local/bin/virtualenvwrapper.sh
+
+# Git scm_breeze
+[ -s "/home/aravind/.scm_breeze/scm_breeze.sh" ] && source "/home/aravind/.scm_breeze/scm_breeze.sh"
+
+# Powerline
+powerline-daemon -q
+POWERLINE_BASH_CONTINUATION=1
+POWERLINE_BASH_SELECT=1
+. "$HOME/.local/lib/python3.8/site-packages/powerline/bindings/bash/powerline.sh"
+
+# Go
+mkdir -p /tmp/go
+
+go env -w GOPATH="$HOME/go"
+go env -w GOTMPDIR="/tmp/go"
+export PATH="$PATH:$(go env GOPATH)/bin"
+
+# Terraform
+complete -C /usr/bin/terraform terraform
